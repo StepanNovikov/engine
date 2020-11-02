@@ -3,8 +3,8 @@
 ?>
 
     <h1>Подтверждение</h1>
-    <p><input type="text" placeholder="Код"></p>
-    <p><input type="text" placeholder="Столица Беларуси?"></p>
-    <p><button>Подтвердить</button></p>
+    <p><input type="text" placeholder="Код" id="code"></p>
+    <p><input type="text" placeholder="Столица Беларуси?" id="captcha"></p>
+    <p><button onclick="post_query('gform','confirm','code.captcha')">Подтвердить</button></p> 
 
 <?php bottom();

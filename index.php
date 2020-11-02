@@ -24,6 +24,18 @@
         exit("Страница 404");
     }
 
+
+
+    function message($text){
+        exit('{"message": "'.$text.'"}');
+    }
+
+    function go($url){
+        exit('{"go": "'.$url.'"}');
+    }
+
+
+
     function top($title){
         echo '<!DOCTYPE html>
         <html lang="en">
@@ -33,13 +45,15 @@
             <title>'.$title.'</title>
             <link rel="stylesheet" href="style.css">
             <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+            <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="crossorigin="anonymous"></script>
+            <script src="script.js"></script> 
         </head>
         <body>
         <div class="wrapper">
             <div class="menu">
-                <a href="/">Main</a>
-                <a href="/login">Login</a>
-                <a href="/register">Register</a>
+                <a href="/engine">Main</a>
+                <a href="/engine/login">Login</a>
+                <a href="/engine/register">Register</a>
             </div>
 
             <div class="content">
