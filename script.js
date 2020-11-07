@@ -1,4 +1,4 @@
-function post_query(url, name, data){
+function post_query(url, name, data){'gform','register','email.password.captcha'
 
     let str = "";
 

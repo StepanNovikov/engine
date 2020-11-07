@@ -34,6 +34,30 @@
         exit('{"go": "'.$url.'"}');
     }
 
+    function captcha_show(){
+        $questions = array(
+            1=>'Столица России?',
+            2=>'Столица Беларуси?',
+            3=>'Столица США?',
+        );
+
+        $num = mt_rand(1,count($questions));
+        $_SESSION['captcha'] = $num;
+        echo $questions[$num];
+    }
+
+    function captcha_valid(){
+        $answers = array(
+            1=>'москва?',
+            2=>'минск?',
+            3=>'вашингтон',
+        );
+
+        if($_SESSION['captcha'] != array_search(strtolower($_POST['captcha']), $answers)){
+            message("Ответ на вопрос указан неверно!");
+        }
+    }
+
 
 
     function top($title){
