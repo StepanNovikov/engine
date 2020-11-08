@@ -1,4 +1,7 @@
 <?php
+    if(!$_SESSION['confirm']['code'] ){
+        not_found();
+    }
     top('Подтверждение');
 ?>
 

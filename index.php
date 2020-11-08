@@ -5,12 +5,17 @@
     } else {
         $page = substr($_SERVER['REQUEST_URI'],strrpos($_SERVER['REQUEST_URI'], '/') + 1);
         if (!preg_match('/^[A-z0-9]{3,15}$/',$page)){
-            exit('error url');
+            not_found();
         }
     }
 
+    $connect = mysqli_connect('localhost','root','root','engine');
+
+    if(!$connect) exit('error');
+
     session_start();
      
+
     
     if(file_exists("all/".$page.".php")){
         
@@ -21,7 +26,7 @@
     } else if($_SESSION['ulogin'] != 1 and file_exists("guest/".$page.".php")){
         include "guest/".$page.".php";
     } else {
-        exit("Страница 404");
+        not_found();
     }
 
 
@@ -33,6 +38,15 @@
     function go($url){
         exit('{"go": "'.$url.'"}');
     }
+
+    function randon_str($num = 30){
+        return substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'),0,$num);
+    }
+
+    function not_found(){
+        exit('Страница 404');
+    }
+    
 
     function captcha_show(){
         $questions = array(
@@ -56,6 +70,19 @@
         if($_SESSION['captcha'] != array_search(strtolower($_POST['captcha']), $answers)){
             message("Ответ на вопрос указан неверно!");
         }
+    }
+
+    function email_valid(){
+        if(!filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
+            message('Email указан неверно');
+        }
+    }
+
+    function password_valid(){
+        if(!preg_match('/^[A-z0-9]{10,30}$/',$_POST['password'])){
+            message('Пароль указан неверно и может содержать 10-30 символов');
+        }
+        $_POST['password'] = md5($_POST['password']);
     }
 
 
